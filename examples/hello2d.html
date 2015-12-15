@@ -46,6 +46,9 @@
         var mapDiv = document.getElementById('map-div');
         map = new google.maps.Map(mapDiv, mapOptions);
 
+
+        window.onresize = function() { google.maps.event.trigger(map, 'resize'); }
+
         // initialize the canvasLayer
         var canvasLayerOptions = {
           map: map,
@@ -70,7 +73,7 @@
 
         // we like our rectangles hideous
         context.fillStyle = 'rgba(230, 77, 26, 1)';
-        
+
         /* We need to scale and translate the map for current view.
          * see https://developers.google.com/maps/documentation/javascript/maptypes#MapCoordinates
          */
@@ -82,7 +85,7 @@
          * it yet.
          */
         context.setTransform(1, 0, 0, 1, 0, 0);
-        
+
         // scale is just 2^zoom
         // If canvasLayer is scaled (with resolutionScale), we need to scale by
         // the same amount to account for the larger canvas.
